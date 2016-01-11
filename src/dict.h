@@ -170,7 +170,10 @@ void dictFreeVal(dict *d, dictEntry *entry);
 
 #define dictHashKey(d, key) (d)->type->hashFunction(key)
 #define dictGetKey(he) ((he)->key)
-#define dictGetVal(he) ((he)->v.val[he->mr])
+#define dictGetVal(he) ((he)->v.val[he->mr]
+/*ZZ ADD*/
+#define dictGetValRDB(he) ((he)->v.val[!he->mw]
+/*ZZ END*/
 #define dictGetSignedIntegerVal(he) ((he)->v.s64)
 #define dictGetUnsignedIntegerVal(he) ((he)->v.u64)
 #define dictGetDoubleVal(he) ((he)->v.d)

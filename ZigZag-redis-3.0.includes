@@ -1,0 +1,10 @@
+deps/hiredis
+deps/hiredis/adapters
+deps/jemalloc/include/jemalloc
+deps/jemalloc/include/jemalloc/internal
+deps/jemalloc/include/msvc_compat
+deps/jemalloc/test/include/test
+deps/jemalloc/test/unit
+deps/linenoise
+deps/lua/src
+src

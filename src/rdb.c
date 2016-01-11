@@ -621,7 +621,9 @@ int rdbSaveObject(rio *rdb, robj *o) {
         } else if (o->encoding == REDIS_ENCODING_HT) {
             dictIterator *di = dictGetIterator(o->ptr);
             dictEntry *de;
-
+            dict *d;
+            d = o->ptr;
+            d->state = DICT_CKP;
             if ((n = rdbSaveLen(rdb,dictSize((dict*)o->ptr))) == -1) return -1;
             nwritten += n;
 
@@ -635,6 +637,7 @@ int rdbSaveObject(rio *rdb, robj *o) {
                 nwritten += n;
             }
             dictReleaseIterator(di);
+            d->state = DICT_NORMAL;
 
         } else {
             redisPanic("Unknown hash encoding");

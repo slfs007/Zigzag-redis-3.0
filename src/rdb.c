@@ -629,7 +629,7 @@ int rdbSaveObject(rio *rdb, robj *o) {
 
             while((de = dictNext(di)) != NULL) {
                 robj *key = dictGetKey(de);
-                robj *val = dictGetVal(de);
+                robj *val = dictGetValRDB(de);
 
                 if ((n = rdbSaveStringObject(rdb,key)) == -1) return -1;
                 nwritten += n;
@@ -716,7 +716,7 @@ int rdbSaveRio(rio *rdb, int *error) {
         /* Iterate this DB writing every entry */
         while((de = dictNext(di)) != NULL) {
             sds keystr = dictGetKey(de);
-            robj key, *o = dictGetVal(de);
+            robj key, *o = dictGetValRDB(de);
             long long expire;
             if (de->state == DE_NORMAL || de->state == DE_EMPTY_N)
                 continue;
